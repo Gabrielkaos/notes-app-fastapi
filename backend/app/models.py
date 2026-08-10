@@ -9,6 +9,9 @@ from app.database import Base
 import uuid
 from sqlalchemy.orm import Mapped, mapped_column
 
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import DateTime, Text, String
+
 
 
 
@@ -24,6 +27,6 @@ class Note(Base):
 
     title: Mapped[str] = mapped_column(nullable=False)
     content: Mapped[str] = mapped_column(nullable=False)
-    created_at: Mapped[datetime] = mapped_column(nullable=False, default=_getutcnow, Datetime(timezone=True))
-    updated_at: Mapped[datetime] = mapped_column(nullable=False, default=_getutcnow, \
-                    onupdate=_getutcnow, Datetime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),nullable=False, default=_getutcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),nullable=False, default=_getutcnow, \
+                    onupdate=_getutcnow)
